@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ONCA Technologies - IT Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>FAQ - ONCA Tech</h1>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <input type="text" id="searchInput" placeholder="Search Sections">
+            <ul>
+                <li><a href="#section1">MFA</a></li>
+                <li><a href="#section2">Section 2</a></li>
+                <li><a href="#section3">Section 3</a></li>
+            </ul>
+        </aside>
+        <main class="content">
+            <section id="section1">
+                <h2>MFA</h2>
+                <h4>Changing the MFA to a new phone</h4>
+                <p></p>
+            </section>
+            <section id="section2">
+                <h2>Section 2</h2>
+                <p>This is the content of section 2.</p>
+            </section>
+            <section id="section3">
+                <h2>Section 23</h2>
+                <p>This is the content of section 3.</p>
+            </section>
+        </main>
+    </div>
+    <footer>
+        &copy; 2023 Onca Tech
+    </footer>
+    <script>
+// Add event listeners to the links in the sidebar
+const links = document.querySelectorAll('.sidebar a');
+const searchInput = document.getElementById('searchInput');
+
+// Set Section 1 as the default
+document.getElementById('section1').style.display = 'block';
+
+// Function to filter sections based on search input
+function filterSections() {
+    const searchValue = searchInput.value.toLowerCase();
+
+    links.forEach(link => {
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            const sectionTitle = targetSection.querySelector('h2').textContent.toLowerCase();
+            if (sectionTitle.includes(searchValue) || searchValue === '') {
+                targetSection.style.display = 'block';
+            } else {
+                targetSection.style.display = 'none';
+            }
+        }
+    });
+}
+
+// Add event listeners for section links and search input
+links.forEach(link => {
+    link.addEventListener('click', () => {
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            // Hide all sections and show the clicked section
+            document.querySelectorAll('.content section').forEach(section => {
+                section.style.display = 'none';
+            });
+            targetSection.style.display = 'block';
+        }
+    });
+});
+
+searchInput.addEventListener('input', filterSections);
+
+
+    </script>
+</body>
+</html>
